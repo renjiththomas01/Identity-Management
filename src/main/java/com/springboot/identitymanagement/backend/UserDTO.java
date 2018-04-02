@@ -11,6 +11,8 @@ public final class UserDTO {
     private String password;
     
     private String email;
+    
+    private String userRole;
 
     public UserDTO() {
 

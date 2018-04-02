@@ -14,7 +14,9 @@ final class User {
     
     private String password;
 
-    private String email;    
+    private String email;  
+    
+    private String userRole;
 
     public User() {}
 
@@ -23,6 +25,7 @@ final class User {
         this.userName = builder.userName;
         this.password = builder.password;
         this.email = builder.email;
+        this.userRole = builder.userRole;
     }
 
     static Builder getBuilder() {
@@ -33,12 +36,13 @@ final class User {
         return id;
     }
 
-    public void update(String name, String userName, String password, String email) {
+    public void update(String name, String userName, String password, String email, String userRole) {
 
         this.name = name;
         this.userName = userName;
         this.password = password;
         this.email = email;
+        this.userRole = userRole;
     }
 
     public String getName() {
@@ -56,23 +60,25 @@ final class User {
 	public String getEmail() {
 		return email;
 	}
+	
+	public String getUserRole() {
+		return userRole;
+	}
 
 	@Override
     public String toString() {
         return String.format(
-                "User[id=%s, name=%s, userName=%s, password=%s, email=%s]",
+                "User[id=%s, name=%s, userName=%s, password=%s, email=%s, userRole=%s]",
                 this.id,
                 this.name,
                 this.userName,
                 this.password,
-                this.email
+                this.email,
+                this.userRole
         );
     }
 
-    /**
-     * We don't have to use the builder pattern here because the constructed class has only two String fields.
-     * However, I use the builder pattern in this example because it makes the code a bit easier to read.
-     */
+ 
     static class Builder {
 
         private String name;
@@ -82,6 +88,8 @@ final class User {
         private String password;
         
         private String email;
+        
+        private String userRole;
 
         private Builder() {}
 
@@ -102,6 +110,11 @@ final class User {
 
         Builder email(String email) {
             this.email = email;
+            return this;
+        }
+        
+        Builder userRole(String userRole) {
+            this.userRole = userRole;
             return this;
         }
 
