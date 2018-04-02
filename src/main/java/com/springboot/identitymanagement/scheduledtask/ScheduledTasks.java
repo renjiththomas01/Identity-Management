@@ -1,7 +1,5 @@
 package com.springboot.identitymanagement.scheduledtask;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,15 +16,15 @@ public class ScheduledTasks {
 
 	private static final Logger log = LoggerFactory.getLogger(ScheduledTasks.class);
 
-	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-
 	@Autowired
 	ScheduledTasks(UserService service) {
 		this.service = service;
 	}
 
+	//call the method in every minute
 	@Scheduled(fixedRate = 60000)
-	public void reportCurrentTime() {
+	public void displayAllUsers() {
+		//Retrieve all users from service
 		List<UserDTO> allUsers = service.findAll();
 
 		StringBuffer users = new StringBuffer();
@@ -34,7 +32,7 @@ public class ScheduledTasks {
 			users.append(user.getUserName());
 			users.append(";");
 		}
-		log.info("The time is now {}", dateFormat.format(new Date()));
+		
 		if (null != users && users.length() != 0) {
 			log.info("The users are {}", users.toString());
 		} else {
