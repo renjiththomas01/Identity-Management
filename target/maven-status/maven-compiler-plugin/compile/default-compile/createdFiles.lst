@@ -5,6 +5,7 @@ com\springboot\identitymanagement\backend\MongoDbUserService.class
 com\springboot\identitymanagement\backend\UserDTO.class
 com\springboot\identitymanagement\backend\User$Builder.class
 com\springboot\identitymanagement\IdentityManager.class
+com\springboot\identitymanagement\scheduledtask\ScheduledTasks.class
 com\springboot\identitymanagement\backend\SwaggerConfig.class
 com\springboot\identitymanagement\backend\User.class
 com\springboot\identitymanagement\backend\User$1.class
