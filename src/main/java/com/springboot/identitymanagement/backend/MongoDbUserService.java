@@ -40,17 +40,24 @@ final class MongoDbUserService implements UserService{
 	        return convertToDTO(persisted);
 	    }
 
-	    @Override
-	    public UserDTO delete(String id) {
-	        LOGGER.info("Deleting a user entry with id: {}", id);
+	@Override
+	public String delete(String loginUserId, String deleteUserId) {
+		LOGGER.info("Deleting a user entry with id: {}", deleteUserId);
+		try {
+			User loginUser = findUserById(loginUserId);
+			User deletedUser = findUserById(deleteUserId);
+			if (!loginUser.getUserRole().equalsIgnoreCase("admin")) {
+				return "Delete user error: Only admin users can delete profiles";
+			}
+			repository.delete(deletedUser);
+			LOGGER.info("Deleted user entry with informtation: {}", deletedUser);
 
-	        User deleted = findUserById(id);
-	        repository.delete(deleted);
-
-	        LOGGER.info("Deleted user entry with informtation: {}", deleted);
-
-	        return convertToDTO(deleted);
-	    }
+		} catch (UserNotFoundException e) {
+			LOGGER.info("UserNotFoundException thrown");
+			return "Invalid user id";
+		}
+		return "User successfully deleted";
+	}
 
 	    @Override
 	    public List<UserDTO> findAll() {
@@ -121,6 +128,8 @@ final class MongoDbUserService implements UserService{
 	        Optional<User> result = repository.findOne(id);
 	        return result.orElseThrow(() -> new UserNotFoundException(id));
 	    }
+	    
+	   
 
 	    private UserDTO convertToDTO(User model) {
 	        UserDTO dto = new UserDTO();

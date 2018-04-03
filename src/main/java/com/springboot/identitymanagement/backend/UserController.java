@@ -38,22 +38,33 @@ final class UserController {
 
         return created;
     }
+    
+    @RequestMapping(value = "{{loginUserId}/{deleteUserId}}", method = RequestMethod.DELETE)
+    String delete(@PathVariable("loginUserId") String loginUserId, @PathVariable("deleteUserId") String deleteUserId)  {
+        LOGGER.info("Deleting user entry with id: {}", loginUserId);      
 
-    @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+        String response = service.delete(loginUserId, deleteUserId);
+       // LOGGER.info("Deleted user entry with information: {}", deleted);
+
+       // return new ResponseEntity(HttpStatus.OK);
+        return response;
+    }
+
+   /* @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     UserDTO delete(@PathVariable("id") String id) {
         LOGGER.info("Deleting user entry with id: {}", id);
         
-        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         auth.getPrincipal();
         LOGGER.info("auth.getPrincipal(): {}", auth.getPrincipal());
         LOGGER.info("auth.getName(): ", auth.getName());
-        LOGGER.info("auth.isAuthenticated(): {}", auth.isAuthenticated());*/
+        LOGGER.info("auth.isAuthenticated(): {}", auth.isAuthenticated());
 
         UserDTO deleted = service.delete(id);
         LOGGER.info("Deleted user entry with information: {}", deleted);
 
         return deleted;
-    }
+    }*/
 
    /* @RequestMapping(method = RequestMethod.GET)
     List<UserDTO> findAll() {

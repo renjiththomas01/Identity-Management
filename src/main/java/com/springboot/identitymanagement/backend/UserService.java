@@ -6,7 +6,7 @@ public interface UserService {
 
     UserDTO create(UserDTO user);
 
-    UserDTO delete(String id);
+    String delete(String loginUserId, String deleteUserId);
 
     List<UserDTO> findAll();
 
