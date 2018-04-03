@@ -50,7 +50,7 @@ final class MongoDbUserService implements UserService{
 				return "Delete user error: Only admin users can delete profiles";
 			}
 			repository.delete(deletedUser);
-			LOGGER.info("Deleted user entry with informtation: {}", deletedUser);
+			LOGGER.info("Deleted user with informtation: {}", deletedUser);
 
 		} catch (UserNotFoundException e) {
 			LOGGER.info("UserNotFoundException thrown");

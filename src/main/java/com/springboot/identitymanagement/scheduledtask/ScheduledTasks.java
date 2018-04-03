@@ -34,7 +34,7 @@ public class ScheduledTasks {
 		}
 		
 		if (null != users && users.length() != 0) {
-			log.info("The users are {}", users.toString());
+			log.info("The current users are: {}", users.toString());
 		} else {
 			log.info("No users are created");
 		}
