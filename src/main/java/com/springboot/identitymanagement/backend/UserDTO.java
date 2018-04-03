@@ -56,17 +56,26 @@ public final class UserDTO {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}	
+	
+	public String getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(String userRole) {
+		this.userRole = userRole;
 	}
 
 	@Override
     public String toString() {
         return String.format(
-                "UserDTO[id=%s, name=%s, userName=%s, password=%s, email=%s]",
+                "UserDTO[id=%s, name=%s, userName=%s, password=%s, email=%s, userRole=%s]",
                 this.id,
                 this.name,
                 this.userName,
                 this.password,
-                this.email
+                this.email,
+                this.userRole
         );
     }
 }

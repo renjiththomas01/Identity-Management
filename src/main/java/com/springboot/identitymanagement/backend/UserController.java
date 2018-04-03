@@ -42,6 +42,12 @@ final class UserController {
     @RequestMapping(value = "{id}", method = RequestMethod.DELETE)
     UserDTO delete(@PathVariable("id") String id) {
         LOGGER.info("Deleting user entry with id: {}", id);
+        
+        /*Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        auth.getPrincipal();
+        LOGGER.info("auth.getPrincipal(): {}", auth.getPrincipal());
+        LOGGER.info("auth.getName(): ", auth.getName());
+        LOGGER.info("auth.isAuthenticated(): {}", auth.isAuthenticated());*/
 
         UserDTO deleted = service.delete(id);
         LOGGER.info("Deleted user entry with information: {}", deleted);

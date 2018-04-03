@@ -30,9 +30,8 @@ final class MongoDbUserService implements UserService{
 	                .name(user.getName())
 	                .userName(user.getUserName())
 	                .password(user.getPassword())
-	                .email(user.getEmail())
-	                //TODO
-	            //    .userRole(user.getUserNam)
+	                .email(user.getEmail())	                
+	                .userRole(user.getUserRole())
 	                .build();
 
 	        persisted = repository.save(persisted);
@@ -105,12 +104,12 @@ final class MongoDbUserService implements UserService{
 	    }
 
 	    @Override
-	    public UserDTO update(UserDTO todo) {
-	        LOGGER.info("Updating user entry with information: {}", todo);
+	    public UserDTO update(UserDTO user) {
+	        LOGGER.info("Updating user entry with information: {}", user);
 
-	        User updated = findUserById(todo.getId());
-	        //TODO
-	       // updated.update(todo.getName(), todo.getUserName(),todo.getPassword(), todo.getEmail());
+	        User updated = findUserById(user.getId());
+	      
+	        updated.update(user.getName(), user.getUserName(),user.getPassword(), user.getEmail(), user.getUserRole());
 	        updated = repository.save(updated);
 
 	        LOGGER.info("Updated user entry with information: {}", updated);
@@ -131,6 +130,7 @@ final class MongoDbUserService implements UserService{
 	        dto.setUserName(model.getUserName());
 	        dto.setPassword(model.getPassword());
 	        dto.setEmail(model.getEmail());
+	        dto.setUserRole(model.getUserRole());
 
 	        return dto;
 	    }
