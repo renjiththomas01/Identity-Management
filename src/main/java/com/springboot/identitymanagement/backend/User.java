@@ -1,9 +1,13 @@
 package com.springboot.identitymanagement.backend;
 
+import static com.springboot.identitymanagement.validation.UserValidation.isTrue;
+import static com.springboot.identitymanagement.validation.UserValidation.notEmpty;
+import static com.springboot.identitymanagement.validation.UserValidation.notNull;
+import static com.springboot.identitymanagement.validation.UserValidation.validateUserRole;
+
 import org.springframework.data.annotation.Id;
 
-final class User {
-
+final class User {	
  
     @Id
     private String id;
@@ -120,8 +124,25 @@ final class User {
 
         User build() {
             User build = new User(this);
+            
+            build.inputValidations(build.getName(),build.getUserName(), build.getPassword(), build.getUserRole());
 
             return build;
         }
+    }
+    
+    private void inputValidations(String name, String userName, String password, String userRole) {
+        notNull(name, "Name cannot be null");
+        notNull(userName, "userName cannot be null");
+        notNull(password, "password cannot be null");
+        notNull(userRole, "userRole should be either 'admin' or 'user' ");
+        notEmpty(name, "Name cannot be empty");
+        notEmpty(userName, "userName cannot be empty");
+        notEmpty(password, "password cannot be empty");
+        notEmpty(userRole, "userRole should be either 'admin' or 'user' ");
+        isTrue(validateUserRole().contains(userRole.toUpperCase()),
+                "User roles should be either 'admin' or 'user'"           
+        );
+        
     }
 }
